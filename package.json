@@ -1,0 +1,34 @@
+{
+  "name": "takeoff_staff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JhonySmith/takeoff_staff.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JhonySmith/takeoff_staff/issues"
+  },
+  "homepage": "https://github.com/JhonySmith/takeoff_staff#readme",
+  "devDependencies": {
+    "@babel/core": "7.12.10",
+    "@babel/preset-env": "7.12.11",
+    "@babel/preset-react": "7.12.10",
+    "babel-loader": "8.2.2",
+    "webpack": "5.11.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  }
+}
