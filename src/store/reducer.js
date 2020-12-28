@@ -1,11 +1,13 @@
 const ActionType = {
   CURRENT_USER: 'CURRENT_USER',
-  ADRESS_LIST: 'ADRESS_LIST',
+  ADRESSES_LIST: 'ADRESSES_LIST',
+  CURRENT_USER_ID: 'CURRENT_USER_ID',
 };
 
-const initState = {
-  user: '',
-  adressList: [],
+const initialState = {
+  currentUser: '',
+  currentUserId: '',
+  adressesList: [],
 };
 
 const ActionCreator = {
@@ -15,24 +17,36 @@ const ActionCreator = {
       payload: user,
     };
   },
-  adressList: (list) => {
+  currentUserId: (userId) => {
     return {
-      type: ActionCreator.ADRESS_LIST,
+      type: ActionType.CURRENT_USER_ID,
+      payload: userId,
+    };
+  },
+  adressesList: (list) => {
+    return {
+      type: ActionType.ADRESSES_LIST,
       payload: list,
     };
   },
 };
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CURRENT_USER:
       return Object.assign({}, state, {
-        user: action.payload,
+        currentUser: action.payload,
       });
-    case ActionType.ADRESS_LIST:
+    case ActionType.CURRENT_USER_ID:
       return Object.assign({}, state, {
-        adressList: action.payload,
+        currentUserId: action.payload,
       });
+    case ActionType.ADRESSES_LIST:
+      return Object.assign({}, state, {
+        adressesList: action.payload,
+      });
+    default:
+      return state;
   }
 };
 
