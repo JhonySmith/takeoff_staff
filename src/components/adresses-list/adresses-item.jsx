@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AdressesItem = (props) => {
-  const { editHandler, removeAdressHandler, adress } = props;
+  const { editHandler, removeAdressHandler, adress, setDataFormOpen } = props;
+
+  const editButtonClickHandler = () => {
+    setDataFormOpen(true);
+
+    return <>
+  }
 
   return (
     <li>

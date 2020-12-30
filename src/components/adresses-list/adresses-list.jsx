@@ -14,6 +14,7 @@ const AdressesList = (props) => {
   const { adressesList, currentUserId, authSuccessHandler } = props;
 
   const [showAddForm, setShowAddForm] = useState(false);
+  const [dataFormOpen, setDataFormOpen] = useState(false);
 
   const addAdressHandler = (fio, email, phone) => {
     let id = Math.random().toString().split('.').join('');
@@ -34,7 +35,7 @@ const AdressesList = (props) => {
       });
   };
 
-  const removeAdressHandler = (id) => {
+  const removeAdressHandler = (id, fio, email, phone) => {
     dataBase
       .collection('adresses')
       .doc(currentUserId)
@@ -46,12 +47,34 @@ const AdressesList = (props) => {
       });
   };
 
+  const editAdressHandler = (data) => {
+    dataBase
+      .collection('adresses')
+      .doc(currentUserId)
+      .update({
+        [data.id]: {
+          id: data.id,
+          fio: data.fio,
+          email: data.email,
+          phone: data.phone,
+        },
+      })
+      .then(() => {
+        authSuccessHandler();
+      });
+  };
+
   return (
     <React.Fragment>
       <AddAdressButton setShowAddForm={setShowAddForm} />
       <ul>
         {adressesList.map((adress) => (
-          <AdressesItem adress={adress} removeAdressHandler={removeAdressHandler} />
+          <AdressesItem
+            adress={adress}
+            removeAdressHandler={removeAdressHandler}
+            editAdressHandler={editAdressHandler}
+            setDataFormOpen={setDataFormOpen}
+          />
         ))}
       </ul>
       {showAddForm ? (
