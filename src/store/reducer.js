@@ -1,6 +1,7 @@
 const ActionType = {
   CURRENT_USER: 'CURRENT_USER',
   ADRESSES_LIST: 'ADRESSES_LIST',
+  SHOWING_ADRESSES_LIST: 'SHOWING_ADRESSES_LIST',
   CURRENT_USER_ID: 'CURRENT_USER_ID',
 };
 
@@ -8,6 +9,7 @@ const initialState = {
   currentUser: '',
   currentUserId: '',
   adressesList: [],
+  showingAdressesList: [],
 };
 
 const ActionCreator = {
@@ -29,6 +31,12 @@ const ActionCreator = {
       payload: list,
     };
   },
+  showingAdressesList: (list) => {
+    return {
+      type: ActionType.SHOWING_ADRESSES_LIST,
+      payload: list,
+    };
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -44,6 +52,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.ADRESSES_LIST:
       return Object.assign({}, state, {
         adressesList: action.payload,
+      });
+    case ActionType.SHOWING_ADRESSES_LIST:
+      return Object.assign({}, state, {
+        showingAdressesList: action.payload,
       });
     default:
       return state;

@@ -2,26 +2,26 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const DataForm = (props) => {
-  const { eventHandler, setDataFormOpen, data, id } = props;
+  const { eventHandler, data } = props;
 
-  const [fio, setFio] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const fioRef = React.createRef();
+  const emailRef = React.createRef();
+  const phoneRef = React.createRef();
 
   useEffect(() => {
-    if (data) {
-      setFio(data.fio);
-      setEmail(data.email);
-      setPhone(data.phone);
+    if (Array.isArray(data) && data.length) {
+      fioRef.current.value = data.fio;
+      emailRef.current.value = data.email;
+      phoneRef.current.value = data.phone;
     }
-  });
+  }, [data]);
 
   const sendEndData = () => {
     let endData = {
-      id,
-      fio,
-      email,
-      phone,
+      id: data.id || '',
+      fio: fioRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneRef.current.value,
     };
     eventHandler(endData);
   };
@@ -30,30 +30,15 @@ const DataForm = (props) => {
     <form>
       <label for="fio">
         ФИО
-        <input
-          type="text"
-          value={fio}
-          name="fio"
-          onChange={(evt) => setFio(evt.target.value)}
-        ></input>
+        <input ref={fioRef} type="text" name="fio" defaultValue=""></input>
       </label>
       <label for="email">
         email
-        <input
-          type="email"
-          value={email}
-          name="email"
-          onChange={(evt) => setEmail(evt.target.value)}
-        ></input>
+        <input ref={emailRef} type="email" name="email"></input>
       </label>
       <label for="phone-number">
         phone
-        <input
-          type="phone"
-          value={phone}
-          name="phone"
-          onChange={(evt) => setPhone(evt.target.value)}
-        ></input>
+        <input ref={phoneRef} type="phone" name="phone"></input>
       </label>
       <button
         onClick={(evt) => {

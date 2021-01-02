@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AdressesItem = (props) => {
-  const { editHandler, removeAdressHandler, adress, setDataFormOpen } = props;
+  const { removeAdressHandler, adress, openDataForm, editAdressHandler } = props;
 
-  const editButtonClickHandler = () => {
-    setDataFormOpen(true);
-
-    return <>
-  }
+  const onEditButtonClick = () => {
+    openDataForm(adress);
+  };
 
   return (
     <li>
@@ -20,7 +18,7 @@ const AdressesItem = (props) => {
           <button
             onClick={(evt) => {
               evt.preventDefault();
-              editHandler();
+              onEditButtonClick();
             }}
           >
             <span>Изменить</span>

@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
 
 import AdressesItem from './adresses-item.jsx';
 import AddAdressButton from './add-adress-button.jsx';
+import SearchField from '../search-field/search-field.jsx';
 import AddAdressForm from './add-adress-form.jsx';
+import DataForm from './data-form.jsx';
 import { dataBase } from '../server/config.js';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+const MODS = {
+  DEFAULT: 'default',
+  EDIT: 'edit',
+  NEW: 'new',
+};
+
 const AdressesList = (props) => {
-  const { adressesList, currentUserId, authSuccessHandler } = props;
+  const { showingAdressesList, currentUserId, authSuccessHandler } = props;
 
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [dataFormOpen, setDataFormOpen] = useState(false);
+  const [dataFormOpened, setDataFormOpened] = useState(false);
+  const [dataForForm, setDataForForm] = useState([]);
+  const [mode, setMode] = useState(MODS.DEFAULT);
 
-  const addAdressHandler = (fio, email, phone) => {
+  const addAdressHandler = (data) => {
     let id = Math.random().toString().split('.').join('');
 
     dataBase
@@ -25,9 +34,9 @@ const AdressesList = (props) => {
       .update({
         [id]: {
           id,
-          fio,
-          email,
-          phone,
+          fio: data.fio,
+          email: data.email,
+          phone: data.phone,
         },
       })
       .then(() => {
@@ -64,21 +73,36 @@ const AdressesList = (props) => {
       });
   };
 
+  const openDataForm = (data) => {
+    if (Array.isArray(data) && data.length) {
+      setDataForForm(data);
+      setMode(MODS.EDIT);
+    } else {
+      setDataForForm([]);
+      setMode(MODS.NEW);
+    }
+    setDataFormOpened(true);
+  };
+
   return (
     <React.Fragment>
-      <AddAdressButton setShowAddForm={setShowAddForm} />
+      <SearchField />
+      <AddAdressButton openDataFormHandler={openDataForm} />
       <ul>
-        {adressesList.map((adress) => (
+        {showingAdressesList.map((adress) => (
           <AdressesItem
             adress={adress}
             removeAdressHandler={removeAdressHandler}
             editAdressHandler={editAdressHandler}
-            setDataFormOpen={setDataFormOpen}
+            openDataForm={openDataForm}
           />
         ))}
       </ul>
-      {showAddForm ? (
-        <AddAdressForm setShowAddForm={setShowAddForm} addAdressHandler={addAdressHandler} />
+      {dataFormOpened ? (
+        <DataForm
+          data={dataForForm}
+          eventHandler={mode === MODS.NEW ? addAdressHandler : editAdressHandler}
+        />
       ) : (
         ''
       )}
@@ -87,11 +111,11 @@ const AdressesList = (props) => {
 };
 
 AdressesList.propTypes = {
-  adressesList: PropTypes.array,
+  showingAdressesList: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-  adressesList: state.adressesList,
+  showingAdressesList: state.showingAdressesList,
 });
 
 export default connect(mapStateToProps, null)(AdressesList);

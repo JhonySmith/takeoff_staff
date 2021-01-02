@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { user, userId } = this.props;
+    const { userId } = this.props;
     const { showingPage } = this.state;
 
     switch (showingPage) {
@@ -54,6 +54,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getUserAdressesHandler(adresses) {
+    dispatch(ActionCreator.showingAdressesList(adresses));
     dispatch(ActionCreator.adressesList(adresses));
   },
 });
