@@ -1,20 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import validator from 'validator';
+import ErrorMessage from '../authorization/error-message.jsx';
 
 const DataForm = (props) => {
-  const { eventHandler, data } = props;
+  const { eventHandler, data, setDataFormOpened } = props;
 
   const fioRef = React.createRef();
   const emailRef = React.createRef();
   const phoneRef = React.createRef();
 
+  const [error, setError] = useState('');
+
   useEffect(() => {
-    if (Array.isArray(data) && data.length) {
+    if (Array.isArray(Object.values(data)) && Object.values(data).length) {
       fioRef.current.value = data.fio;
       emailRef.current.value = data.email;
       phoneRef.current.value = data.phone;
+    } else {
+      fioRef.current.value = '';
+      emailRef.current.value = '';
+      phoneRef.current.value = '';
     }
   }, [data]);
+
+  const validateData = () => {
+    if (!validator.isEmail(emailRef.current.value)) {
+      setError('Неверный формат адреса');
+    } else if (!validator.isMobilePhone(phoneRef.current.value)) {
+      setError('Введен неправильный форма номера телефона');
+    } else if (!fioRef.current.value) {
+      setError('Вы не указали ФИО');
+    } else {
+      setError('');
+      sendEndData();
+    }
+  };
 
   const sendEndData = () => {
     let endData = {
@@ -27,35 +48,44 @@ const DataForm = (props) => {
   };
 
   return (
-    <form>
-      <label for="fio">
-        ФИО
-        <input ref={fioRef} type="text" name="fio" defaultValue=""></input>
+    <form className="data-form">
+      <label className="data-form__label" for="fio">
+        ФИО:
+        <input
+          className="data-form__input"
+          ref={fioRef}
+          type="text"
+          name="fio"
+          defaultValue=""
+        ></input>
       </label>
-      <label for="email">
-        email
-        <input ref={emailRef} type="email" name="email"></input>
+      <label className="data-form__label" for="email">
+        Email:
+        <input className="data-form__input" ref={emailRef} type="email" name="email"></input>
       </label>
-      <label for="phone-number">
-        phone
-        <input ref={phoneRef} type="phone" name="phone"></input>
+      <label className="data-form__label" for="phone-number">
+        Phone:
+        <input className="data-form__input" ref={phoneRef} type="phone" name="phone"></input>
       </label>
       <button
+        className="data-form__button"
         onClick={(evt) => {
           evt.preventDefault();
-          sendEndData();
+          validateData();
         }}
       >
         ОК
       </button>
       <button
+        className="data-form__button"
         onClick={(evt) => {
           evt.preventDefault();
-          setDataFormOpen(false);
+          setDataFormOpened(false);
         }}
       >
         Отмена
       </button>
+      <ErrorMessage error={error} />
     </form>
   );
 };

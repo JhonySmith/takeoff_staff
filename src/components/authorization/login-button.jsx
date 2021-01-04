@@ -6,6 +6,7 @@ const LoginButton = (props) => {
 
   return (
     <button
+      className="button button--login"
       onClick={(evt) => {
         evt.preventDefault();
         onLoginButtonHandler();

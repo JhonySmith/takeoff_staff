@@ -5,9 +5,10 @@ const PasswordInput = (props) => {
   const { onPasswordChange } = props;
 
   return (
-    <label for="password-field">
-      Введите логин
+    <label for="password-field" className="label label--password">
+      Введите пароль
       <input
+        className="input input--password"
         type="password"
         name="password-field"
         onChange={(evt) => {

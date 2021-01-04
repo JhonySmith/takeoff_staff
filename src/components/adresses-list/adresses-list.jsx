@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import AdressesItem from './adresses-item.jsx';
 import AddAdressButton from './add-adress-button.jsx';
 import SearchField from '../search-field/search-field.jsx';
-import AddAdressForm from './add-adress-form.jsx';
 import DataForm from './data-form.jsx';
 import { dataBase } from '../server/config.js';
 
@@ -40,6 +39,7 @@ const AdressesList = (props) => {
         },
       })
       .then(() => {
+        setDataFormOpened(false);
         authSuccessHandler();
       });
   };
@@ -69,12 +69,17 @@ const AdressesList = (props) => {
         },
       })
       .then(() => {
+        setDataFormOpened(false);
         authSuccessHandler();
       });
   };
 
   const openDataForm = (data) => {
-    if (Array.isArray(data) && data.length) {
+    if (dataFormOpened) {
+      setDataFormOpened(false);
+    }
+
+    if (data) {
       setDataForForm(data);
       setMode(MODS.EDIT);
     } else {
@@ -88,20 +93,28 @@ const AdressesList = (props) => {
     <React.Fragment>
       <SearchField />
       <AddAdressButton openDataFormHandler={openDataForm} />
-      <ul>
-        {showingAdressesList.map((adress) => (
+      <table className="adresses-list">
+        <tr>
+          <th>№</th>
+          <th>ФИО</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+        {showingAdressesList.map((adress, index) => (
           <AdressesItem
+            index={index}
             adress={adress}
             removeAdressHandler={removeAdressHandler}
             editAdressHandler={editAdressHandler}
             openDataForm={openDataForm}
           />
         ))}
-      </ul>
+      </table>
       {dataFormOpened ? (
         <DataForm
           data={dataForForm}
           eventHandler={mode === MODS.NEW ? addAdressHandler : editAdressHandler}
+          setDataFormOpened={setDataFormOpened}
         />
       ) : (
         ''

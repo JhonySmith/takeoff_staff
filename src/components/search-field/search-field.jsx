@@ -17,14 +17,19 @@ const SearchField = (props) => {
   };
 
   return (
-    <input
-      ref={searchTextRef}
-      type="text"
-      onChange={(evt) => {
-        evt.preventDefault();
-        onChangeSearchText();
-      }}
-    ></input>
+    <label for="search" className="search-label">
+      Быстрый поиск
+      <input
+        className="search-input"
+        ref={searchTextRef}
+        type="text"
+        onChange={(evt) => {
+          evt.preventDefault();
+          onChangeSearchText();
+        }}
+        placeholder="Введите ФИО..."
+      ></input>
+    </label>
   );
 };
 

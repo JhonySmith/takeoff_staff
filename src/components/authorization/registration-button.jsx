@@ -6,6 +6,7 @@ const RegistrationButton = (props) => {
 
   return (
     <button
+      className="button button--registr"
       onClick={(evt) => {
         evt.preventDefault();
         onRegisterButtonHandler();

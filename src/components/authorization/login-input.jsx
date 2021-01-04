@@ -5,9 +5,10 @@ const LoginInput = (props) => {
   const { onLoginChange } = props;
 
   return (
-    <label for="login-field">
+    <label for="login-field" className="label label--login">
       Введите логин
       <input
+        className="input input--login"
         type="text"
         name="login-field"
         onChange={(evt) => {

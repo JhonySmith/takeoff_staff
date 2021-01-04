@@ -1,0 +1,193 @@
+body {
+  margin: 0;
+}
+
+button {
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 5px;
+}
+
+.auth-form {
+  max-width: 300px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 300px;
+
+  border: 2px solid black;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.input {
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  padding: 5px;
+  border: 1px solid black;
+
+  border-radius: 2px;
+
+  font-size: 14px;
+}
+
+.button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+
+  background-color: black;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.5;
+}
+
+.error-message {
+  min-height: 20px;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.adresses-list {
+  margin: 0 auto;
+  margin-top: 40px;
+  border-collapse: collapse;
+
+  font-size: 16px;
+}
+
+.adresses-list td {
+  padding: 5px;
+
+  border: 1px solid black;
+  text-align: center;
+}
+
+.action-button {
+  border: none;
+  background-color: transparent;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.action-button:hover {
+  text-decoration: underline;
+}
+
+.adress-item {
+  display: flex;
+
+  list-style-type: none;
+}
+
+.search-label {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 200px;
+
+  margin-top: 50px;
+  margin-left: 50px;
+
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.search-input {
+  padding: 5px;
+}
+
+.new-adress-button {
+  padding: 5px;
+  margin-top: 10px;
+  margin-left: 50px;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  background-color: rgb(210, 255, 210);
+
+  border: 2px solid black;
+
+  cursor: pointer;
+}
+
+.new-adress-button:hover {
+  opacity: 0.5;
+}
+
+.data-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  position: absolute;
+  border: 2px solid black;
+  background-color: white;
+}
+
+.data-form__button {
+  margin: 5px;
+  padding: 5px;
+
+  background-color: black;
+  color: white;
+
+  font-weight: bold;
+  font-size: 14px;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.data-form__button:hover {
+  opacity: 0.5;
+}
+
+.data-form__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 5px;
+
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.data-form__input {
+  width: 200px;
+
+  padding: 5px;
+  margin-left: 5px;
+}

@@ -2,40 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AdressesItem = (props) => {
-  const { removeAdressHandler, adress, openDataForm, editAdressHandler } = props;
+  const { removeAdressHandler, adress, index, openDataForm, editAdressHandler } = props;
 
   const onEditButtonClick = () => {
     openDataForm(adress);
   };
 
   return (
-    <li>
-      <ul>
-        <li>ФИО: {adress.fio}</li>
-        <li>email: {adress.email}</li>
-        <li>Номер телефона: {adress.phone}</li>
-        <li>
-          <button
-            onClick={(evt) => {
-              evt.preventDefault();
-              onEditButtonClick();
-            }}
-          >
-            <span>Изменить</span>
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={(evt) => {
-              evt.preventDefault();
-              removeAdressHandler(adress.id);
-            }}
-          >
-            <span>Удалить</span>
-          </button>
-        </li>
-      </ul>
-    </li>
+    <tr>
+      <td>{index + 1}</td>
+      <td>{adress.fio}</td>
+      <td>{adress.email}</td>
+      <td>{adress.phone}</td>
+      <td>
+        <button
+          className="action-button"
+          onClick={(evt) => {
+            evt.preventDefault();
+            onEditButtonClick();
+          }}
+        >
+          <span>Изменить</span>
+        </button>
+      </td>
+      <td>
+        <button
+          className="action-button"
+          onClick={(evt) => {
+            evt.preventDefault();
+            removeAdressHandler(adress.id);
+          }}
+        >
+          <span>Удалить</span>
+        </button>
+      </td>
+    </tr>
   );
 };
 

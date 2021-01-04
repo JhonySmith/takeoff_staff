@@ -69,7 +69,7 @@ const Authorization = (props) => {
   };
 
   return (
-    <form>
+    <form className="form auth-form">
       <LoginInput onLoginChange={setLogin} />
       <PasswordInput onPasswordChange={setPassword} />
       <LoginButton onLoginButtonHandler={onLoginButtonHandler} />

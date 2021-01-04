@@ -5,12 +5,13 @@ const AddAdressButton = (props) => {
 
   return (
     <button
+      className="new-adress-button"
       onClick={(evt) => {
         evt.preventDefault();
         openDataFormHandler();
       }}
     >
-      Добавить
+      Добавить новый адрес
     </button>
   );
 };
