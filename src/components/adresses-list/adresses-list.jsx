@@ -18,7 +18,7 @@ const MODS = {
 };
 
 const AdressesList = (props) => {
-  const { showingAdressesList, currentUserId, authSuccessHandler } = props;
+  const { showingAdressesList, adressesList, currentUserId, authSuccessHandler } = props;
 
   const [dataFormOpened, setDataFormOpened] = useState(false);
   const [dataForForm, setDataForForm] = useState([]);
@@ -115,6 +115,7 @@ const AdressesList = (props) => {
           data={dataForForm}
           eventHandler={mode === MODS.NEW ? addAdressHandler : editAdressHandler}
           setDataFormOpened={setDataFormOpened}
+          adresses={adressesList}
         />
       ) : (
         ''
@@ -129,6 +130,7 @@ AdressesList.propTypes = {
 
 const mapStateToProps = (state) => ({
   showingAdressesList: state.showingAdressesList,
+  adressesList: state.adressesList,
 });
 
 export default connect(mapStateToProps, null)(AdressesList);
