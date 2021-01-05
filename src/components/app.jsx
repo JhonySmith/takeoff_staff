@@ -29,6 +29,8 @@ class App extends React.Component {
       .then((doc) => {
         if (doc.exists) {
           getUserAdressesHandler(Object.values(doc.data()));
+        } else {
+          dataBase.collection('adresses').doc(userId).set({});
         }
         this.setState({ showingPage: 'adresses' });
       });
