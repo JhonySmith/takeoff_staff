@@ -28,14 +28,13 @@ const DataForm = (props) => {
     const fioReg = new RegExp(fioRef.current.value, 'i');
 
     const alredyExist = adresses.slice().filter((adress) => fioReg.test(adress.fio));
-
     if (!validator.isEmail(emailRef.current.value)) {
       setError('Неверный формат адреса');
     } else if (!validator.isMobilePhone(phoneRef.current.value)) {
       setError('Введен неправильный форма номера телефона');
     } else if (!fioRef.current.value) {
       setError('Вы не указали ФИО');
-    } else if (alredyExist) {
+    } else if (alredyExist.length) {
       setError('Такой контакт уже существует');
     } else {
       setError('');
